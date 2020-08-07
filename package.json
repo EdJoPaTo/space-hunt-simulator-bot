@@ -1,0 +1,85 @@
+{
+	"name": "space-hunt-simulator-bot",
+	"private": true,
+	"version": "0.0.0",
+	"description": "Telegram Bot to assist you with the Telegram game SpaceHunt",
+	"license": "MIT",
+	"repository": "EdJoPaTo/space-hunt-simulator-bot",
+	"author": {
+		"name": "EdJoPaTo",
+		"email": "space-hunt-simulator-telegram-bot@edjopato.de",
+		"url": "https://edjopato.de"
+	},
+	"scripts": {
+		"build": "del-cli dist && tsc",
+		"prepack": "npm run build",
+		"start": "tsc --sourceMap && node --unhandled-rejections=strict -r source-map-support/register dist/source/index.js",
+		"test": "tsc --sourceMap && xo && nyc ava"
+	},
+	"engines": {
+		"node": ">=14"
+	},
+	"dependencies": {
+		"@edjopato/datastore": "^0.3.2",
+		"emoji-regex": "^9.0.0",
+		"source-map-support": "^0.5.19",
+		"telegraf": "^3.38.0",
+		"telegraf-i18n": "^6.6.0",
+		"telegraf-inline-menu": "^5.0.0",
+		"telegraf-middleware-console-time": "^1.1.0",
+		"telegraf-session-local": "^2.0.0"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^0.7.0",
+		"@types/emoji-regex": "^8.0.0",
+		"@types/node": "^14.0.5",
+		"ava": "^3.0.0",
+		"del-cli": "^3.0.0",
+		"nyc": "^15.0.0",
+		"typescript": "^3.7.4",
+		"xo": "^0.32.0"
+	},
+	"files": [
+		"dist/source",
+		"!*.test.*"
+	],
+	"main": "dist/source",
+	"types": "dist/source",
+	"nyc": {
+		"extension": [
+			".ts"
+		],
+		"include": [
+			"dist/source",
+			"source"
+		],
+		"exclude": [
+			"**/*.d.ts",
+			"**/*.test.ts"
+		],
+		"reporter": [
+			"lcov",
+			"text"
+		]
+	},
+	"xo": {
+		"semicolon": false,
+		"rules": {
+			"@typescript-eslint/prefer-readonly-parameter-types": "error",
+			"unicorn/no-fn-reference-in-iterator": "off",
+			"ava/no-ignored-test-files": "off"
+		},
+		"overrides": [
+			{
+				"files": [
+					"source/bot/**/*.*",
+					"source/**/*.test.ts",
+					"test/**/*.ts"
+				],
+				"rules": {
+					"@typescript-eslint/prefer-readonly-parameter-types": "off"
+				}
+			}
+		]
+	}
+}

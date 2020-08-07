@@ -1,0 +1,12 @@
+welcome: >
+  Hey ${from.first_name}!
+help: This is some example help text.
+menu:
+  back: zurück…
+  main: Hauptmenü…
+  settings: Einstellungen
+  language: Sprache
+settings:
+  body: >
+    Hier kannst du Dinge zu diesem Bot einstellen.
+  language: Wähle deine Sprache

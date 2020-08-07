@@ -1,0 +1,12 @@
+welcome: >
+  Hey ${from.first_name}!
+help: This is some example help text.
+menu:
+  back: back…
+  main: main…
+  settings: Settings
+  language: Language
+settings:
+  body: >
+    Feel free to set the settings you prefer.
+  language: Select your language
