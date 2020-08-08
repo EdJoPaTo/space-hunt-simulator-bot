@@ -1,6 +1,6 @@
 import emojiRegex from 'emoji-regex'
 
-import {Location} from '../../location'
+import {Location} from '../location'
 
 import {replaceTinyLetters} from './tiny-letters'
 

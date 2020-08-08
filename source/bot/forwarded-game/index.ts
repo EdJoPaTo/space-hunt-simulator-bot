@@ -2,13 +2,13 @@ import {Composer} from 'telegraf'
 
 import {MyContext} from '../my-context'
 
+import {bot as containsPlayerBot} from './contains-players'
 import {bot as dashboardBot} from './dashboard'
-import {bot as playerLocationsBot} from './player-locations'
 
 export const bot = new Composer<MyContext>()
 
+bot.use(containsPlayerBot)
 bot.use(dashboardBot)
-bot.use(playerLocationsBot)
 
 bot.use(async ctx => {
 	if (process.env.NODE_ENV !== 'production') {

@@ -6,6 +6,21 @@ menu:
   main: main…
   settings: Settings
   language: Language
+locations:
+  title: Player Locations
+  unitTravelTime: Unit travel time
+  emptySpot: >
+    There is no player you are looking for.
+    (I don't know about someone at that location)
+
+
+    Forward me messages from the game containing players with locations so I can learn about them.
+  help: >
+    You can use the inline search of this bot to select a target you would like.
+
+    Use this in @SpaceHuntBot to instantly select your search result as destination.
+
+    Use this in the current bot to see infos about travel times to there.
 settings:
   body: >
     Feel free to set the settings you prefer.

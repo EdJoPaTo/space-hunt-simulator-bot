@@ -1,4 +1,4 @@
-import {Location} from '../../location'
+import {Location} from '../location'
 import {Research} from '../types'
 
 import {replaceTinyLetters} from './tiny-letters'

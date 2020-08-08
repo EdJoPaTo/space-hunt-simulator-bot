@@ -3,10 +3,23 @@ export interface Location {
 	readonly y: number;
 }
 
+export const INFINITY_LOCATION = {x: Infinity, y: Infinity}
+
+export function locationString(location: Location | undefined): string {
+	const x = location && Number.isFinite(location.x) ? location.x : '???'
+	const y = location && Number.isFinite(location.y) ? location.y : '???'
+	return `${x}x${y}`
+}
+
+export function locationCommand(location: Location): string {
+	return `/d${location.x}x${location.y}`
+}
+
 export function distanceBetween(a: Location, b: Location): number {
 	const xDifference = a.x - b.x
 	const yDifference = a.y - b.y
-	return (xDifference ** 2) + (yDifference ** 2)
+	const squared = (xDifference ** 2) + (yDifference ** 2)
+	return Math.sqrt(squared)
 }
 
 export function locationsAreEqual(...locations: readonly Location[]): boolean {

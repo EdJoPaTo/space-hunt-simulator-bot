@@ -10,7 +10,9 @@ import {CHAT_ID} from '../game'
 
 import {MyContext} from './my-context'
 import {menu} from './menu'
+import {bot as destinationBot} from './destination'
 import {bot as forwardedFromGameBot} from './forwarded-game'
+import {bot as inlineQueryBot} from './inline-query'
 
 const tokenFilePath = existsSync('/run/secrets') ? '/run/secrets/bot-token.txt' : 'bot-token.txt'
 const token = readFileSync(tokenFilePath, 'utf8').trim()
@@ -36,15 +38,18 @@ if (process.env.NODE_ENV !== 'production') {
 	bot.use(generateUpdateMiddleware())
 }
 
-bot.command('help', async context => context.reply(context.i18n.t('help')))
+bot.hears(['/help', '/start help'], async context => context.reply(context.i18n.t('help')))
 
 const menuMiddleware = new MenuMiddleware('/', menu)
+bot.hears(['/locations', '/start locations'], async context => menuMiddleware.replyToContext(context, '/locations/'))
 bot.command('start', async context => menuMiddleware.replyToContext(context))
 bot.command('simulator', async context => menuMiddleware.replyToContext(context, '/simulator/'))
 bot.command('settings', async context => menuMiddleware.replyToContext(context, '/settings/'))
 bot.use(menuMiddleware.middleware())
 
 bot.use(Composer.optional(context => context.message?.forward_from?.id === CHAT_ID, forwardedFromGameBot))
+bot.use(destinationBot)
+bot.use(inlineQueryBot)
 
 bot.catch((error: any) => {
 	console.error('telegraf error occured', error)

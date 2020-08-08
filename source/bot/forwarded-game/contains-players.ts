@@ -1,8 +1,8 @@
 import {Composer} from 'telegraf'
 
+import {distanceBetween, getPlayers, PLAYER_REGEX} from '../../game'
 import {MyContext} from '../my-context'
-import {PLAYER_REGEX, getPlayers} from '../../game/messages/players'
-import * as playerLocations from '../../player-locations'
+import * as playerHistory from '../../player-history'
 
 export const bot = new Composer<MyContext>()
 
@@ -12,7 +12,7 @@ bot.hears(PLAYER_REGEX, async ctx => {
 
 	for (const player of players) {
 		// eslint-disable-next-line no-await-in-loop
-		await playerLocations.add(player.name, player.location, unixSeconds)
+		await playerHistory.add(player, unixSeconds)
 	}
 
 	await ctx.reply(`Awesome! Now I know a bit more about ${players.length} players locations.`, {
