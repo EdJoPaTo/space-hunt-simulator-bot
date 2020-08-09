@@ -13,5 +13,6 @@ export interface UnitStats extends CombatParticipantStats {
 }
 
 export type ResourceResearch = 'production' | 'storage'
-export type CombatResearch = 'attack' | 'defense' | 'health' | 'speed'
-export type Research = 'technology' | ResourceResearch | CombatResearch | 'repair' | 'intelligence'
+export type CombatResearch = 'attack' | 'defense' | 'health'
+export type UnitResearch = CombatResearch | 'speed'
+export type Research = 'technology' | ResourceResearch | UnitResearch | 'repair' | 'intelligence'

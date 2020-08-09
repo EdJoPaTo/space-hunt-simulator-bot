@@ -1,7 +1,7 @@
 import test, {ExecutionContext} from 'ava'
 
 import {calculateUnitAttack, calculateUnitDefense, calculateUnitHealth, calculateUnitSpeed} from './unit-research'
-import {CombatResearch } from './types'
+import {UnitResearch} from './types'
 import {UNITS, UNIT_STATS, UnitName} from './units'
 
 const RESEARCH_FUNCTION = {
@@ -11,13 +11,13 @@ const RESEARCH_FUNCTION = {
 	speed: calculateUnitSpeed
 }
 
-function researchLevel0IsStillBase(t: ExecutionContext, unit: UnitName, key: CombatResearch): void {
+function researchLevel0IsStillBase(t: ExecutionContext, unit: UnitName, key: UnitResearch): void {
 	const base = UNIT_STATS[unit][key]
 	const actual = RESEARCH_FUNCTION[key](unit, 0)
 	t.is(actual, base)
 }
 
-researchLevel0IsStillBase.title = (_title: string, unit: UnitName, key: CombatResearch) => `research level 0 is still base ${unit} ${key}`
+researchLevel0IsStillBase.title = (_title: string, unit: UnitName, key: UnitResearch) => `research level 0 is still base ${unit} ${key}`
 
 for (const unit of UNITS) {
 	test(researchLevel0IsStillBase, unit, 'attack')
@@ -26,11 +26,11 @@ for (const unit of UNITS) {
 	test(researchLevel0IsStillBase, unit, 'speed')
 }
 
-function calculateUnitMacro(t: ExecutionContext, research: CombatResearch, unit: UnitName, researchLevel: number, expected: number): void {
+function calculateUnitMacro(t: ExecutionContext, research: UnitResearch, unit: UnitName, researchLevel: number, expected: number): void {
 	t.is(RESEARCH_FUNCTION[research](unit, researchLevel), expected)
 }
 
-calculateUnitMacro.title = (_title: string, research: CombatResearch, unit: UnitName, researchLevel: number) => {
+calculateUnitMacro.title = (_title: string, research: UnitResearch, unit: UnitName, researchLevel: number) => {
 	return `calculateUnit ${research} ${researchLevel} ${unit}`
 }
 
