@@ -7,6 +7,7 @@ import {replaceTinyLetters} from './tiny-letters'
 export interface Player {
 	readonly guild: string;
 	readonly conquerer?: string;
+	readonly debris: 'large' | 'small' | false;
 	readonly name: string;
 	readonly score: number;
 	readonly location: Location;
@@ -15,7 +16,7 @@ export interface Player {
 export const SCORE_K = 'ᴋ'
 export const SCORE_M = 'ᴍ'
 
-export const PLAYER_REGEX = /(\S+) (\w+) (?:🔅 )?🎖([\d.]+[ᴋᴍ]?) 🌐 \/d(\d+x\d+)/
+export const PLAYER_REGEX = /(\S+) (\w+) (?:(🔆|🔅) )?🎖([\d.]+[ᴋᴍ]?) 🌐 \/d(\d+x\d+)/
 
 export function getPlayers(text: string): readonly Player[] {
 	const result: Player[] = []
@@ -23,11 +24,15 @@ export function getPlayers(text: string): readonly Player[] {
 	const regex = new RegExp(PLAYER_REGEX, 'g')
 	let match
 	while ((match = regex.exec(text))) {
+		const debrisPart = match[3]
+		const debris = debrisPart === '🔆' ? 'large' : (debrisPart ? 'small' : false)
+
 		result.push({
 			...parseGuild(match[1]),
 			name: match[2],
-			score: parseScore(match[3]),
-			location: parseLocation(match[4])
+			debris,
+			score: parseScore(match[4]),
+			location: parseLocation(match[5])
 		})
 	}
 

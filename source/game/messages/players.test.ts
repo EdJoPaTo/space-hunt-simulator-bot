@@ -12,6 +12,7 @@ Units: 5 🇮🇲 Liberator. 5 🇲🇴 Observer.`
 	t.deepEqual(players, [{
 		guild: '🌕',
 		conquerer: undefined,
+		debris: false,
 		name: 'Bob',
 		score: 326100,
 		location: {
