@@ -75,12 +75,20 @@
 		"overrides": [
 			{
 				"files": [
-					"source/bot/**/*.*",
+					"source/bot/**/*.*"
+				],
+				"rules": {
+					"@typescript-eslint/prefer-readonly-parameter-types": "off"
+				}
+			},
+			{
+				"files": [
 					"source/**/*.test.ts",
 					"test/**/*.ts"
 				],
 				"rules": {
-					"@typescript-eslint/prefer-readonly-parameter-types": "off"
+					"@typescript-eslint/prefer-readonly-parameter-types": "off",
+					"max-params": "off"
 				}
 			}
 		]
