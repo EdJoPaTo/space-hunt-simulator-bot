@@ -1,6 +1,6 @@
 import {Composer} from 'telegraf'
 
-import {distanceBetween, getPlayers, PLAYER_REGEX} from '../../game'
+import {getPlayers, PLAYER_REGEX} from '../../game'
 import {MyContext} from '../my-context'
 import * as playerHistory from '../../player-history'
 
