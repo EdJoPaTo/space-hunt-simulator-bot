@@ -1,6 +1,6 @@
 import {UnitStats} from './types'
 
-export type UnitName = 'observer' | 'scout' | 'smallcargoship' | 'wraith' | 'liberator' | 'largecargoship' | 'pierchingmissile' | 'battlecruiser' | 'guardian' | 'bomber' | 'destroyer' | 'massivecargoship' | 'deathstar'
+export type UnitName = 'observer' | 'scout' | 'smallcargoship' | 'wraith' | 'liberator' | 'largecargoship' | 'piercingmissile' | 'battlecruiser' | 'guardian' | 'bomber' | 'destroyer' | 'massivecargoship' | 'deathstar'
 
 export const UNIT_STATS: Readonly<Record<UnitName, UnitStats>> = {
 	observer: {
@@ -45,7 +45,7 @@ export const UNIT_STATS: Readonly<Record<UnitName, UnitStats>> = {
 		speed: 7500,
 		capacity: 25000
 	},
-	pierchingmissile: {
+	piercingmissile: {
 		attack: 7000,
 		defense: 0,
 		health: 1,
