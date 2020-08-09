@@ -1,7 +1,7 @@
 import {Composer} from 'telegraf'
 import {html as format} from 'telegram-format'
 
-import {Location, locationString, INFINITY_LOCATION, distanceBetween, UnitName, calculateUnitSpeed, calculateTravelTimeInMinutes} from '../game'
+import {Location, locationString, INFINITY_LOCATION, distanceBetween, UnitName, calculateUnitSpeed} from '../game'
 import * as playerHistory from '../player-history'
 
 import {MyContext} from './my-context'
@@ -62,8 +62,8 @@ function unitLine(unit: UnitName, speedResearchLevel: number, distance: number):
 	return speedLine(unit, calculateUnitSpeed(unit, speedResearchLevel), distance)
 }
 
-function speedLine(title: string, speed: number, distance: number): string {
-	const totalMinutes = calculateTravelTimeInMinutes(distance, speed)
+function speedLine(title: string, _speed: number, _distance: number): string {
+	const totalMinutes = 42
 	const minutes = totalMinutes % 60
 	const hours = Math.floor(totalMinutes / 60)
 	return `${title}: ${hours}h${minutes.toFixed(0)}m`
