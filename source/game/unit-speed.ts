@@ -8,5 +8,5 @@ export function calculateUnitSpeed(unit: UnitName, speedResearchLevel = 0): numb
 
 export function calculateTravelTimeInMinutes(_distance: number, _slowestUnitSpeed: number): number {
 	// TODO: what the?
-	return NaN
+	return Number.NaN
 }
