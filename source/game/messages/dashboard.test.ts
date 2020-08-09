@@ -25,7 +25,7 @@ test('example', t => {
 			repair: 4,
 			intelligence: 6,
 			attack: 10,
-			defence: 10,
+			defense: 10,
 			health: 10,
 			speed: 10
 		}

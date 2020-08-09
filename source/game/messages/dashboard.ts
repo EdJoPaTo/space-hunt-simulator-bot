@@ -44,7 +44,7 @@ export function parseResearch(text: string): Readonly<Record<Research, number>> 
 		repair: numbers[3],
 		intelligence: numbers[4],
 		attack: numbers[5],
-		defence: numbers[6],
+		defense: numbers[6],
 		health: numbers[7],
 		speed: numbers[8]
 	}
