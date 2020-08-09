@@ -2,8 +2,6 @@ import {DefensiveBuildingStats} from './types'
 
 export type DefensiveBuildingName = 'lightlaser' | 'heavylaser' | 'ioncannon' | 'smallplanetaryshield' | 'gausscannon' | 'largeplanetaryshield' | 'plasmaturret'
 
-export const DEFENSIVE_BUILDINGS: readonly DefensiveBuildingName[] = ['lightlaser', 'heavylaser', 'ioncannon', 'smallplanetaryshield', 'gausscannon', 'largeplanetaryshield', 'plasmaturret']
-
 export const DEFENSIVE_BUILDING_STATS: Readonly<Record<DefensiveBuildingName, DefensiveBuildingStats>> = {
 	lightlaser: {
 		attack: 450,
@@ -40,4 +38,10 @@ export const DEFENSIVE_BUILDING_STATS: Readonly<Record<DefensiveBuildingName, De
 		defense: 2000,
 		health: 44000
 	}
+}
+
+export const DEFENSIVE_BUILDINGS: readonly DefensiveBuildingName[] = Object.keys(DEFENSIVE_BUILDING_STATS) as any[]
+
+export function isDefensiveBuilding(something: any): something is DefensiveBuildingName {
+	return typeof something === 'string' && DEFENSIVE_BUILDINGS.includes(something as any)
 }

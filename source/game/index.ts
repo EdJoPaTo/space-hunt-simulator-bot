@@ -1,3 +1,4 @@
+export * from './combat-participant'
 export * from './defensive-buildings'
 export * from './location'
 export * from './messages'
