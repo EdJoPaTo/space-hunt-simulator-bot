@@ -9,7 +9,7 @@ import {MyContext} from './my-context'
 export const bot = new Composer<MyContext>()
 
 bot.hears(/^\/d(\d+)x(\d+)$/, async context => {
-	const location: Location = {x: Number(context.match![1]), y: Number(context.match![2])}
+	const location: Location = {x: Number(context.match[1]), y: Number(context.match[2])}
 	const name = playerHistory.getByLocation(location)
 
 	if (!name) {

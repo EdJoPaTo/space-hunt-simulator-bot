@@ -12,7 +12,7 @@ export const DASHBOARD_REGEX = /🌐[\s\S]+Research[\s\S]+Units[\s\S]+Metal[\s\S
 
 export function parseDashboard(text: string): Dashboard {
 	const locationMatch = /🌐(\d+)x(\d+)/.exec(text)!
-	const researchLine = /Research: (.+)/.exec(text)![1]
+	const researchLine = /Research: (.+)/.exec(text)![1]!
 
 	const location: Location = {x: Number(locationMatch[1]), y: Number(locationMatch[2])}
 
@@ -38,14 +38,14 @@ export function parseResearch(text: string): Readonly<Record<Research, number>> 
 	}
 
 	return {
-		technology: numbers[0],
-		production: numbers[1],
-		storage: numbers[2],
-		repair: numbers[3],
-		intelligence: numbers[4],
-		attack: numbers[5],
-		defense: numbers[6],
-		health: numbers[7],
-		speed: numbers[8]
+		technology: numbers[0]!,
+		production: numbers[1]!,
+		storage: numbers[2]!,
+		repair: numbers[3]!,
+		intelligence: numbers[4]!,
+		attack: numbers[5]!,
+		defense: numbers[6]!,
+		health: numbers[7]!,
+		speed: numbers[8]!
 	}
 }

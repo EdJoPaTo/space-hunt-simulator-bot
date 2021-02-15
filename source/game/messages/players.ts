@@ -28,11 +28,11 @@ export function getPlayers(text: string): readonly Player[] {
 		const debris = debrisPart === '🔆' ? 'large' : (debrisPart ? 'small' : false)
 
 		result.push({
-			...parseGuild(match[1]),
-			name: match[2],
+			...parseGuild(match[1]!),
+			name: match[2]!,
 			debris,
-			score: parseScore(match[4]),
-			location: parseLocation(match[5])
+			score: parseScore(match[4]!),
+			location: parseLocation(match[5]!)
 		})
 	}
 

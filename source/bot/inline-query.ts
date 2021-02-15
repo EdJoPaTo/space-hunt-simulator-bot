@@ -1,6 +1,7 @@
 import {Composer} from 'telegraf'
+import {InlineQueryResultArticle} from 'typegram'
 import arrayFilterUnique from 'array-filter-unique'
-import fuzzysort from 'fuzzysort'
+import * as fuzzysort from 'fuzzysort'
 
 import {locationString, locationCommand} from '../game'
 import * as playerHistory from '../player-history'
@@ -18,8 +19,8 @@ interface AnswerInlineQueryOptions {
 export const bot = new Composer<MyContext>()
 
 bot.on('inline_query', async ctx => {
-	const {query} = ctx.inlineQuery!
-	const offset = Number(ctx.inlineQuery!.offset) || 0
+	const {query} = ctx.inlineQuery
+	const offset = Number(ctx.inlineQuery.offset) || 0
 
 	let players: string[] = []
 	const options: AnswerInlineQueryOptions = {
@@ -30,9 +31,9 @@ bot.on('inline_query', async ctx => {
 	options.switch_pm_text = 'How does this player location search work?'
 	options.switch_pm_parameter = 'locations'
 
-	if (query && query.length >= 1) {
+	if (query && query.length > 0) {
 		const allPlayers = [...playerHistory.getNames()]
-		const result = await fuzzysort.goAsync(ctx.inlineQuery!.query, allPlayers)
+		const result = await fuzzysort.goAsync(ctx.inlineQuery.query, allPlayers)
 		players = result
 			.map(o => o.target)
 			.filter(arrayFilterUnique())
@@ -40,7 +41,7 @@ bot.on('inline_query', async ctx => {
 
 	const playerResults = players
 		.slice(offset, offset + 20)
-		.map(name => {
+		.map((name): InlineQueryResultArticle => {
 			const stats = playerHistory.getByName(name)!
 			return {
 				type: 'article',

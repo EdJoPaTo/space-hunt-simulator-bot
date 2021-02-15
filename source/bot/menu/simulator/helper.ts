@@ -1,7 +1,11 @@
 import {MyContext, Fleet} from '../../my-context'
 
 export function isAttacker(context: MyContext): boolean {
-	return context.callbackQuery!.data!.includes('attacker')
+	if (!context.callbackQuery || !('data' in context.callbackQuery)) {
+		throw new TypeError('needs to be DataCallbackQuery')
+	}
+
+	return context.callbackQuery.data.includes('attacker')
 }
 
 export function calculateUnitAmount(units: Fleet): number {

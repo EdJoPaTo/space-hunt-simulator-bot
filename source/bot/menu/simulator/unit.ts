@@ -57,7 +57,11 @@ function set(context: MyContext, key: string): boolean {
 }
 
 function getUnit(context: MyContext): CombatParticipantName {
-	const data = context.callbackQuery!.data!
+	if (!('data' in context.callbackQuery!)) {
+		throw new TypeError('has to be DataCallbackQuery')
+	}
+
+	const {data} = context.callbackQuery
 	const unit = /\/unit:([^/]+)/.exec(data)![1]
 	return unit as any
 }

@@ -3,7 +3,7 @@ export interface Location {
 	readonly y: number;
 }
 
-export const INFINITY_LOCATION = {x: Infinity, y: Infinity}
+export const INFINITY_LOCATION = {x: Number.POSITIVE_INFINITY, y: Number.POSITIVE_INFINITY}
 
 export function locationString(location: Location | undefined): string {
 	const x = location && Number.isFinite(location.x) ? location.x : '???'
@@ -27,7 +27,7 @@ export function locationsAreEqual(...locations: readonly Location[]): boolean {
 		return true
 	}
 
-	const first = locations[0]
+	const first = locations[0]!
 	if (Number.isNaN(first.x) || Number.isNaN(first.y)) {
 		return false
 	}

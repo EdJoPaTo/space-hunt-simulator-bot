@@ -1,9 +1,9 @@
 import {existsSync, readFileSync} from 'fs'
 
 import {generateUpdateMiddleware} from 'telegraf-middleware-console-time'
+import {I18n as TelegrafI18n} from '@edjopato/telegraf-i18n'
 import {MenuMiddleware} from 'telegraf-inline-menu'
 import {Telegraf, Composer} from 'telegraf'
-import TelegrafI18n from 'telegraf-i18n'
 import TelegrafSessionLocal from 'telegraf-session-local'
 
 import {CHAT_ID} from '../game'
@@ -14,8 +14,13 @@ import {bot as destinationBot} from './destination'
 import {bot as forwardedFromGameBot} from './forwarded-game'
 import {bot as inlineQueryBot} from './inline-query'
 
-const tokenFilePath = existsSync('/run/secrets') ? '/run/secrets/bot-token.txt' : 'bot-token.txt'
-const token = readFileSync(tokenFilePath, 'utf8').trim()
+const token = (existsSync('/run/secrets/bot-token.txt') && readFileSync('/run/secrets/bot-token.txt', 'utf8').trim()) ||
+	(existsSync('bot-token.txt') && readFileSync('bot-token.txt', 'utf8').trim()) ||
+	process.env.BOT_TOKEN
+if (!token) {
+	throw new Error('You have to provide the bot-token from @BotFather via file (bot-token.txt) or environment variable (BOT_TOKEN)')
+}
+
 const bot = new Telegraf<MyContext>(token)
 
 const localSession = new TelegrafSessionLocal({
@@ -47,7 +52,10 @@ bot.command('simulator', async context => menuMiddleware.replyToContext(context,
 bot.command('settings', async context => menuMiddleware.replyToContext(context, '/settings/'))
 bot.use(menuMiddleware.middleware())
 
-bot.use(Composer.optional(context => context.message?.forward_from?.id === CHAT_ID, forwardedFromGameBot))
+bot.use(Composer.optional(
+	context => Boolean(context.message && 'forward_from' in context.message && context.message?.forward_from?.id === CHAT_ID),
+	forwardedFromGameBot
+))
 bot.use(destinationBot)
 bot.use(inlineQueryBot)
 
@@ -63,5 +71,5 @@ export async function start(): Promise<void> {
 	])
 
 	await bot.launch()
-	console.log(new Date(), 'Bot started as', bot.options.username)
+	console.log(new Date(), 'Bot started as', bot.botInfo?.username)
 }

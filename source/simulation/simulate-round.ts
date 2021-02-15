@@ -21,7 +21,7 @@ export function simulateOneParticipant(shooters: readonly SimulationUnit[], targ
 		const {attack} = unit
 		const targetIndex = Math.floor(Math.random() * possibleTargetAmount)
 
-		const damageOnDefense = Math.min(attack, remainingDefenses[targetIndex])
+		const damageOnDefense = Math.min(attack, remainingDefenses[targetIndex]!)
 		remainingDefenses[targetIndex] -= damageOnDefense
 
 		const remainingAttackForHealth = attack - damageOnDefense
@@ -29,6 +29,6 @@ export function simulateOneParticipant(shooters: readonly SimulationUnit[], targ
 	}
 
 	return targets
-		.map((o, i): SimulationUnit => ({...o, healthRemaining: remainingHealths[i]}))
+		.map((o, i): SimulationUnit => ({...o, healthRemaining: remainingHealths[i]!}))
 		.filter(o => o.healthRemaining > 0)
 }
