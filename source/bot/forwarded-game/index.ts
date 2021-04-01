@@ -11,7 +11,8 @@ bot.use(containsPlayerBot)
 bot.use(dashboardBot)
 
 bot.on('message', async ctx => {
-	if (process.env.NODE_ENV !== 'production') {
+	// eslint-disable-next-line @typescript-eslint/dot-notation
+	if (process.env['NODE_ENV'] !== 'production') {
 		console.log('unknown game message', ctx.message)
 	}
 

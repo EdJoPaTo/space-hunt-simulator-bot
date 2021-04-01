@@ -58,7 +58,8 @@ bot.on('inline_query', async ctx => {
 		options.next_offset = String(offset + 20)
 	}
 
-	if (process.env.NODE_ENV !== 'production') {
+	// eslint-disable-next-line @typescript-eslint/dot-notation
+	if (process.env['NODE_ENV'] !== 'production') {
 		options.cache_time = 2
 	}
 
