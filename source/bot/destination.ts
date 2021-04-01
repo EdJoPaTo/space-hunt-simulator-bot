@@ -49,9 +49,10 @@ function travelTimePart(context: MyContext, targetLocation: Location): string {
 	text += ': '
 	text += distance.toFixed(2)
 
-	const speedEntries: string[] = []
-	speedEntries.push(speedLine('Reference', 10000, distance))
-	speedEntries.push(unitLine('liberator', speedResearchLevel, distance))
+	const speedEntries: string[] = [
+		speedLine('Reference', 10000, distance),
+		unitLine('liberator', speedResearchLevel, distance)
+	]
 	text += '\n'
 	text += speedEntries.join('\n')
 
