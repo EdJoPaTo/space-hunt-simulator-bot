@@ -12,8 +12,7 @@
 	},
 	"scripts": {
 		"build": "del-cli dist && tsc",
-		"prepack": "npm run build",
-		"start": "tsc --sourceMap && node --unhandled-rejections=strict -r source-map-support/register dist/source/index.js",
+		"start": "ts-node source/index.ts",
 		"test": "tsc --sourceMap && xo && nyc ava"
 	},
 	"type": "commonjs",
@@ -40,15 +39,10 @@
 		"ava": "^3.0.0",
 		"del-cli": "^3.0.0",
 		"nyc": "^15.0.0",
+		"ts-node": "^9.1.1",
 		"typescript": "^4.2.3",
 		"xo": "^0.38.0"
 	},
-	"files": [
-		"dist/source",
-		"!*.test.*"
-	],
-	"main": "dist/source",
-	"types": "dist/source",
 	"nyc": {
 		"extension": [
 			".ts"
