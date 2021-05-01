@@ -42,6 +42,6 @@ export const DEFENSIVE_BUILDING_STATS: Readonly<Record<DefensiveBuildingName, De
 
 export const DEFENSIVE_BUILDINGS: readonly DefensiveBuildingName[] = Object.keys(DEFENSIVE_BUILDING_STATS) as any[]
 
-export function isDefensiveBuilding(something: any): something is DefensiveBuildingName {
-	return typeof something === 'string' && DEFENSIVE_BUILDINGS.includes(something as any)
+export function isDefensiveBuilding(something: unknown): something is DefensiveBuildingName {
+	return typeof something === 'string' && (DEFENSIVE_BUILDINGS as string[]).includes(something)
 }

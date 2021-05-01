@@ -98,6 +98,6 @@ export const UNIT_STATS: Readonly<Record<UnitName, UnitStats>> = {
 
 export const UNITS: readonly UnitName[] = Object.keys(UNIT_STATS) as any[]
 
-export function isUnit(something: any): something is UnitName {
-	return typeof something === 'string' && UNITS.includes(something as any)
+export function isUnit(something: unknown): something is UnitName {
+	return typeof something === 'string' && (UNITS as string[]).includes(something)
 }
