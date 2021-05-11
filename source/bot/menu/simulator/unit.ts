@@ -63,7 +63,7 @@ function getUnit(context: MyContext): CombatParticipantName {
 
 	const {data} = context.callbackQuery
 	const unit = /\/unit:([^/]+)/.exec(data)![1]
-	return unit as any
+	return unit as CombatParticipantName
 }
 
 function setUnitAmount(context: MyContext, unit: CombatParticipantName, amount: number): void {
