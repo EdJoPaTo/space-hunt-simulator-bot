@@ -16,7 +16,6 @@ import {bot as inlineQueryBot} from './inline-query'
 
 const token = (existsSync('/run/secrets/bot-token.txt') && readFileSync('/run/secrets/bot-token.txt', 'utf8').trim()) ||
 	(existsSync('bot-token.txt') && readFileSync('bot-token.txt', 'utf8').trim()) ||
-	// eslint-disable-next-line @typescript-eslint/dot-notation
 	process.env['BOT_TOKEN']
 if (!token) {
 	throw new Error('You have to provide the bot-token from @BotFather via file (bot-token.txt) or environment variable (BOT_TOKEN)')
@@ -40,7 +39,6 @@ const i18n = new TelegrafI18n({
 
 bot.use(i18n.middleware())
 
-// eslint-disable-next-line @typescript-eslint/dot-notation
 if (process.env['NODE_ENV'] !== 'production') {
 	bot.use(generateUpdateMiddleware())
 }
